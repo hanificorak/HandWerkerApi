@@ -29,7 +29,8 @@ class AuthService
                 ApiResponder::error(
                     'Şifre hatalı',
                     200,
-                    ["Şifre Hatalı"]
+                    ['Girilen şifreniz geçersiz.']
+
                 )
             );
         }

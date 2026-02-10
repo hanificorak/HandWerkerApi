@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Auth\ApprovedRequest;
 use App\Http\Requests\Api\V1\Auth\LoginRequest;
 use App\Http\Requests\Api\V1\Auth\RegisterRequest;
 use App\Http\Responses\ApiResponder;
@@ -30,7 +31,16 @@ class AuthController extends Controller
             $request->validated()
         );
 
-        return ApiResponder::success($result, 'Kayıt başarılı', 201);
+        return ApiResponder::success($result, 'Kayıt başarılı', 200);
+    }
+
+    public function approvedUser(ApprovedRequest $request)
+    {
+        $result = $this->authService->userApproved(
+            $request->validated()
+        );
+
+        return ApiResponder::success($result, 'Doğrulama işlemi başarıyla gerçekleşti.', 200);
     }
 
     public function me(Request $request)

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LoginRequest extends FormRequest
+class ApprovedRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,19 +17,11 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [    
-            'email'    => ['required', 'email'],
-            'password' => ['required', 'string', 'min:6'],
+            'email_verification_code'    => ['required', 'string'],
+            'user_id' => ['required', 'integer'],
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'email.required' => 'E-posta zorunludur',
-            'email.email'    => 'Geçerli bir e-posta giriniz',
-            'password.required' => 'Şifre zorunludur',
-        ];
-    }
 
     protected function failedValidation(Validator $validator)
     {

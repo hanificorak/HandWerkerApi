@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\JobsController;
+use App\Http\Controllers\Api\V1\ParamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,12 +13,21 @@ Route::get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/userApproved', [AuthController::class, 'approvedUser']);
+    Route::post('/param/auth', [ParamController::class, 'AuthParam']);
 
     Route::middleware('auth:sanctum')->get('/me', [AuthController::class, 'me']);
 });
 
+Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
+    Route::post('/param/jobs', [ParamController::class, 'JobsParam']);
+    Route::post('/jobs/add', [JobsController::class, 'add']);
+
+});
+
+
 Route::middleware('auth:sanctum')->get('/v1/me', function (Request $request) {
-    return \App\Http\Responses\ApiResponder::success(
+   return \App\Http\Responses\ApiResponder::success(
         $request->user()
-    );
+    ); 
 });

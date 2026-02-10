@@ -52,4 +52,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function jobs()
+    {
+        return $this->hasMany(UserJobs::class, 'create_user_id', 'id');
+    }
 }

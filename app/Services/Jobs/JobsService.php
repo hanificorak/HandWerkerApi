@@ -18,6 +18,23 @@ use Illuminate\Support\Facades\Mail;
 
 class JobsService
 {
+    public function get(array $data): array
+    {
+        try {
+            $user = Auth::user();
+
+            $query = UserJobs::where('create_user_id', $user->id);
+
+            if (isset($data['status'])) {
+                $query->where('status', $data['status']);
+            }
+
+            return $query->get()->toArray();
+        } catch (\Throwable $th) {
+            return [];
+        }
+    }
+
     public function add(array $data): bool
     {
         try {
@@ -40,7 +57,7 @@ class JobsService
 
             if ($mdl->save()) {
 
-                if ($images != null && count($images) >0 ) {
+                if ($images != null && count($images) > 0) {
                     foreach ($images as $image) {
 
                         // Dosya bilgileri
@@ -75,8 +92,6 @@ class JobsService
                 return false;
             }
         } catch (\Throwable $th) {
-            DB::table('test_logs')->insert(["msg" => $th->getMessage()]);
-
             return false;
         }
     }

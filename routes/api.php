@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\JobsController;
 use App\Http\Controllers\Api\V1\ParamController;
+use App\Http\Controllers\Api\V1\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,12 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
     Route::post('/param/jobs', [ParamController::class, 'JobsParam']);
+
     Route::post('/jobs/add', [JobsController::class, 'add']);
+    Route::post('/jobs/get', [JobsController::class, 'get']);
+
+    Route::post('/profile/getUserInfo',[ProfileController::class,'getUserInfo']);
+    Route::post('/profile/profileUpdate',[ProfileController::class,'profileUpdate']);
 
 });
 

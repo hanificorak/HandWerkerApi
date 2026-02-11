@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ProfileUpdateRequest extends FormRequest
+class PasswordUpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,7 +17,8 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=> ['required', 'string'],
+            'current_password' => ['required' ],
+            'new_password' => ['required'],
         ];
     }
 
@@ -32,4 +33,4 @@ class ProfileUpdateRequest extends FormRequest
             )
         );
     }
-}   
+}

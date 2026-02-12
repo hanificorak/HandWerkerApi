@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\JobsController;
+use App\Http\Controllers\Api\V1\OffersController;
 use App\Http\Controllers\Api\V1\ParamController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use Illuminate\Http\Request;
@@ -20,21 +21,22 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->get('/me', [AuthController::class, 'me']);
 });
 
-Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/param/jobs', [ParamController::class, 'JobsParam']);
 
     Route::post('/jobs/add', [JobsController::class, 'add']);
     Route::post('/jobs/get', [JobsController::class, 'get']);
 
-    Route::post('/profile/getUserInfo',[ProfileController::class,'getUserInfo']);
-    Route::post('/profile/profileUpdate',[ProfileController::class,'profileUpdate']);
-    Route::post('/profile/passwordUpdate',[ProfileController::class,'passwordUpdate']);
+    Route::post('/profile/getUserInfo', [ProfileController::class, 'getUserInfo']);
+    Route::post('/profile/profileUpdate', [ProfileController::class, 'profileUpdate']);
+    Route::post('/profile/passwordUpdate', [ProfileController::class, 'passwordUpdate']);
 
+    Route::post('/offers/get', [OffersController::class, 'get']);
 });
 
 
 Route::middleware('auth:sanctum')->get('/v1/me', function (Request $request) {
-   return \App\Http\Responses\ApiResponder::success(
+    return \App\Http\Responses\ApiResponder::success(
         $request->user()
-    ); 
+    );
 });

@@ -9,7 +9,7 @@ class UserJobs extends Model
     // Status =  0 = Beklemede | 1 = Onaylandı, Teklifler inceleniyor ve bekleniyor... \ 2 = Usta ile Analışldı \ 3 = Tamamlandı | 4 = iptal Edildibb0
 
     protected $table = 'user_jobs';
-    protected $appends = ['country_name', 'city_name','district_name','specialization_name'];
+    protected $appends = ['country_name', 'city_name', 'district_name', 'specialization_name'];
 
 
     public function creator()
@@ -60,4 +60,11 @@ class UserJobs extends Model
     {
         return $this->specializationsRelation->translation->title;
     }
+
+    public function offers()
+    {
+        return $this->hasMany(Offers::class, 'jobs_id', 'id');
+    }
+
+ 
 }

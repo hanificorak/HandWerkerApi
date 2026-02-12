@@ -23,7 +23,9 @@ class JobsService
         try {
             $user = Auth::user();
 
-            $query = UserJobs::where('create_user_id', $user->id);
+            $query = UserJobs::with(['offers', 'countryRelation', 'cityRelation', 'districtRelation', 'specializationsRelation'])
+                ->where('create_user_id', Auth::user()->id);
+
 
             if (isset($data['status'])) {
                 $query->where('status', $data['status']);
@@ -53,6 +55,7 @@ class JobsService
             $mdl->city = $data['city'];
             $mdl->district = $data['district'];
             $mdl->address = $data['address'];
+            $mdl->date = Carbon::parse($data['date'])->format('Y-m-d');
 
 
             if ($mdl->save()) {

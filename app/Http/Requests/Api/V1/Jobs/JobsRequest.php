@@ -23,6 +23,7 @@ class JobsRequest extends FormRequest
             'description' => ['required', 'string', 'min:20'],
 
             'photos'      => ['nullable', 'array'],
+            'date'      => ['nullable'],
 
             'country'     => ['required'],
             'city'        => ['required'],

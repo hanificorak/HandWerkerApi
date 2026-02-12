@@ -17,6 +17,9 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    protected $appends = ['specialization_name'];
+
     protected $fillable = [
         'name',
         'email',
@@ -56,5 +59,15 @@ class User extends Authenticatable
     public function jobs()
     {
         return $this->hasMany(UserJobs::class, 'create_user_id', 'id');
+    }
+
+    public function specializationsRelation()
+    {
+        return $this->belongsTo(specialization::class, 'expert_id', 'id');
+    }
+
+    public function getSpecializationNameAttribute()
+    {
+        return $this->specializationsRelation?->translation->title;
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\JobsController;
 use App\Http\Controllers\Api\V1\OffersController;
 use App\Http\Controllers\Api\V1\ParamController;
 use App\Http\Controllers\Api\V1\ProfileController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->get('/me', [AuthController::class, 'me']);
 });
 
+
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/param/jobs', [ParamController::class, 'JobsParam']);
 
@@ -32,6 +34,13 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/profile/passwordUpdate', [ProfileController::class, 'passwordUpdate']);
 
     Route::post('/offers/get', [OffersController::class, 'get']);
+    Route::post('/offers/get/item', [OffersController::class, 'getItem']);
+
+
+    Route::post('messages/send', [MessageController::class,'send']);
+    Route::post('messages/{userId}/{offer_id}', [MessageController::class,'getMessages']);
+    
+
 });
 
 

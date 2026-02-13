@@ -22,11 +22,8 @@ class JobsController extends Controller
             $request->validated()
         );
 
-        if ($result) {
             return ApiResponder::success($result, 'Kayıt başarıyla tamamlandı.');
-        } else {
-            return ApiResponder::error("Kayıt işlemi başarısız.");
-        }
+       
     }
 
     public function add(JobsRequest $request)

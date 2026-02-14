@@ -35,12 +35,12 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     Route::post('/offers/get', [OffersController::class, 'get']);
     Route::post('/offers/get/item', [OffersController::class, 'getItem']);
+    Route::post('/offers/status/approved', [OffersController::class, 'offerApproved']);
+    Route::post('/offers/status/rejected', [OffersController::class, 'offerRejected']);
 
 
-    Route::post('messages/send', [MessageController::class,'send']);
-    Route::post('messages/{userId}/{offer_id}', [MessageController::class,'getMessages']);
-    
-
+    Route::post('messages/send', [MessageController::class, 'send']);
+    Route::post('messages/{userId}/{offer_id}', [MessageController::class, 'getMessages']);
 });
 
 

@@ -2,19 +2,12 @@
 
 namespace App\Services\Jobs;
 
-use App\Http\Responses\ApiResponder;
-use App\Http\Tools\Tools;
-use App\Mail\RegisterMail;
-use App\Models\User;
+
 use App\Models\UserJobs;
 use App\Models\UserJobsImages;
 use Carbon\Carbon;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Mail;
+
 
 class JobsService
 {

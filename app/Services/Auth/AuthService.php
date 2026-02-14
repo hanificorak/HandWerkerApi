@@ -67,7 +67,7 @@ class AuthService
         ]);
 
 
-  
+
         $this->sendApproveMail($user);
 
         $token = $user->createToken('api')->plainTextToken;

@@ -8,7 +8,7 @@ class Offers extends Model
 {
     public function userJobs()
     {
-        return $this->hasMany(UserJobs::class, 'jobs_id', 'id');
+        return $this->hasMany(UserJobs::class, 'id', 'jobs_id');
     }
 
     public function master()

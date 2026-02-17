@@ -98,7 +98,7 @@ class AuthService
 
 
 
-    public function userApproved(array $data): string
+    public function userApproved(array $data): array
     {
 
         $code = $data['email_verification_code'];
@@ -124,7 +124,10 @@ class AuthService
             $user = User::find($user_id);
             $token = $user->createToken('api')->plainTextToken;
 
-            return $token;
+            return [
+                'token' => $token,
+                'user'  => $user
+            ];
         } else {
             throw new HttpResponseException(
                 ApiResponder::error(

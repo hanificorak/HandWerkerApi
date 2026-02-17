@@ -12,7 +12,7 @@ class ParamController extends Controller
     public function __construct(
         protected ParamService $paramService
     ) {}
-   
+
     public function AuthParam()
     {
         $result = $paramService = $this->paramService->AuthParam();
@@ -23,6 +23,13 @@ class ParamController extends Controller
     public function JobsParam()
     {
         $result = $paramService = $this->paramService->JobsParam();
+
+        return ApiResponder::success($result, 'Param Ok');
+    }
+
+    public function getSearchJobsFilterParam()
+    {
+        $result = $paramService = $this->paramService->getSearchJobsFilterParam();
 
         return ApiResponder::success($result, 'Param Ok');
     }

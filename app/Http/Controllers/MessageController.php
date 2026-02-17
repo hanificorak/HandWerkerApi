@@ -17,7 +17,7 @@ class MessageController extends Controller
             'offer_id' => $request->offer_id
         ]);
 
-        $ch = curl_init('http://192.168.1.100:3000/message');
+        $ch = curl_init('http://192.168.1.105:3000/message');
 
         $data = json_encode([
             'message' => $message->message,

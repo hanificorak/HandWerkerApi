@@ -14,10 +14,17 @@ class JobsService
     public function get(array $data): array
     {
         try {
-            $user = Auth::user();
+
+            $userType = (Auth::user()->expert_id == null ? null : Auth::user()->expert_id);
 
             $query = UserJobs::with(['offers', 'countryRelation', 'cityRelation', 'districtRelation', 'specializationsRelation'])
-                ->where('create_user_id', Auth::user()->id);
+                ->orderByDesc('created_at');
+
+                if ($userType == null) {
+                    $query->where('create_user_id', Auth::user()->id);
+                }else{
+                    $query->where('master_id', Auth::user()->id);
+                }
 
 
             if (isset($data['status'])) {

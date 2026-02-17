@@ -54,6 +54,7 @@ class OffersService
             $mdl->save();
 
             $jobs = UserJobs::find($mdl->jobs_id);
+            $jobs->master_id = $mdl->master_id;
             $jobs->status = 2;
 
             return $jobs->save();

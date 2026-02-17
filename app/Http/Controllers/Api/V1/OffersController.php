@@ -15,18 +15,14 @@ class OffersController extends Controller
         protected OffersService $offersService
     ) {}
 
-    
+
     public function get(JobsOfferRequest $request)
     {
         $result = $offersService = $this->offersService->get(
             $request->validated()
         );
 
-        if ($result) {
-            return ApiResponder::success($result, 'List başarıyla tamamlandı.');
-        } else {
-            return ApiResponder::error("Kayıt işlemi başarısız.");
-        }
+        return ApiResponder::success($result, 'Offers Get Success Result.');
     }
 
     public function getItem(JobsOfferItemRequest $request)
@@ -35,11 +31,7 @@ class OffersController extends Controller
             $request->validated()
         );
 
-        if ($result) {
-            return ApiResponder::success($result, 'List başarıyla tamamlandı.');
-        } else {
-            return ApiResponder::error("Kayıt işlemi başarısız.");
-        }
+        return ApiResponder::success($result, 'Offers Get Item Success Result.');
     }
 
     public function offerApproved(OfferStatusChangeRequest $request)
@@ -54,7 +46,7 @@ class OffersController extends Controller
             return ApiResponder::error("Kayıt işlemi başarısız.");
         }
     }
-    
+
     public function offerRejected(OfferStatusChangeRequest $request)
     {
         $result = $offersService = $this->offersService->offerRejected(
@@ -67,8 +59,4 @@ class OffersController extends Controller
             return ApiResponder::error("Kayıt işlemi başarısız.");
         }
     }
-
-
-
-
 }

@@ -25,8 +25,8 @@ class ParamService
         return [
             "specializ" => $specializations,
             "countries" => Countries::where('is_active', 1)->get(),
-            "cities" => Cities::select('code as id','name','country_id')->get(),
-            "districts"=>Districts::all()
+            "cities" => Cities::select('code as id', 'name', 'country_id')->get(),
+            "districts" => Districts::all()
         ];
     }
 
@@ -41,8 +41,27 @@ class ParamService
         return [
             "specializ" => $specializations,
             "countries" => Countries::where('is_active', 1)->get(),
-            "cities" => Cities::select('code as id','name','country_id')->get(),
-            "districts"=>Districts::all()
+            "cities" => Cities::select('code as id', 'name', 'country_id')->get(),
+            "districts" => Districts::all()
         ];
+    }
+
+    public function getSearchJobsFilterParam(): array
+    {
+        try {
+
+            return [
+                "country" => Countries::all(),
+                "cities" => Cities::all(),
+                "districts" => Districts::all(),
+                "spec" => specialization::query()
+                    ->where('is_active', true)
+                    ->with('translation')
+                    ->get()
+
+            ];
+        } catch (\Throwable $th) {
+            return [];
+        }
     }
 }

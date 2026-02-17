@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\JobsController;
+use App\Http\Controllers\Api\V1\MasterJobsController;
+use App\Http\Controllers\Api\V1\MasterOfferController;
 use App\Http\Controllers\Api\V1\OffersController;
 use App\Http\Controllers\Api\V1\ParamController;
 use App\Http\Controllers\Api\V1\ProfileController;
@@ -42,6 +44,16 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('messages/send', [MessageController::class, 'send']);
     Route::post('messages/{userId}/{offer_id}', [MessageController::class, 'getMessages']);
 });
+
+
+Route::prefix('v1/master')->middleware('auth:sanctum')->group(function () {
+    Route::post('/jobs/searchParam', [ParamController::class, 'getSearchJobsFilterParam']);
+
+    Route::post('jobs/get', [MasterJobsController::class, 'get']);
+    Route::post('jobs/addOffer', [MasterJobsController::class, 'addOffer']);
+    Route::post('offers/get', [MasterOfferController::class, 'get']);
+});
+
 
 
 Route::middleware('auth:sanctum')->get('/v1/me', function (Request $request) {

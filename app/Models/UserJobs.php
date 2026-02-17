@@ -9,7 +9,7 @@ class UserJobs extends Model
     // Status =  0 = Beklemede | 1 = Onaylandı, Teklifler inceleniyor ve bekleniyor... \ 2 = Usta ile Analışldı \ 3 = Tamamlandı | 4 = iptal Edildibb0
 
     protected $table = 'user_jobs';
-    protected $appends = ['country_name', 'city_name', 'district_name', 'specialization_name'];
+    protected $appends = ['country_name', 'city_name', 'district_name', 'specialization_name', 'images'];
 
 
     public function creator()
@@ -66,5 +66,20 @@ class UserJobs extends Model
         return $this->hasMany(Offers::class, 'jobs_id', 'id');
     }
 
- 
+    public function imagesRelation()
+    {
+        return $this->hasMany(UserJobsImages::class, 'user_jobs_id', 'id');
+    }
+    public function getImagesAttribute(): array
+    {
+        if (!$this->relationLoaded('imagesRelation')) {
+            return [];
+        }
+
+        return $this->imagesRelation
+            ->pluck('path')
+            ->map(fn($path) => url($path))
+            ->values()
+            ->toArray();
+    }
 }

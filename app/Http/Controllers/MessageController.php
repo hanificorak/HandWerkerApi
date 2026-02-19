@@ -17,7 +17,7 @@ class MessageController extends Controller
             'offer_id' => $request->offer_id
         ]);
 
-        $ch = curl_init('http://192.168.1.105:3000/message');
+        $ch = curl_init('https://handwerkerio.nubifysoftware.com/message');
 
         $data = json_encode([
             'message' => $message->message,
@@ -43,7 +43,7 @@ class MessageController extends Controller
 
     public function getMessages($userId, $offer_id)
     {
-        $messages = Message::where('offer_id',$offer_id)->where(function ($q) use ($userId) {
+        $messages = Message::where('offer_id', $offer_id)->where(function ($q) use ($userId) {
             $q->where('sender_id', Auth::id())->where('receiver_id', $userId);
         })->orWhere(function ($q) use ($userId) {
             $q->where('sender_id', $userId)->where('receiver_id', Auth::id());

@@ -34,6 +34,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/profile/getUserInfo', [ProfileController::class, 'getUserInfo']);
     Route::post('/profile/profileUpdate', [ProfileController::class, 'profileUpdate']);
     Route::post('/profile/passwordUpdate', [ProfileController::class, 'passwordUpdate']);
+    Route::post('/profile/addressUpdate', [ProfileController::class, 'addressUpdate']);
 
     Route::post('/offers/get', [OffersController::class, 'get']);
     Route::post('/offers/get/item', [OffersController::class, 'getItem']);
@@ -43,6 +44,8 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     Route::post('messages/send', [MessageController::class, 'send']);
     Route::post('messages/{userId}/{offer_id}', [MessageController::class, 'getMessages']);
+
+
 });
 
 

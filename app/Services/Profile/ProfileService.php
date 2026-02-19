@@ -44,4 +44,21 @@ class ProfileService
             return ["status" => false, "message" => $th->getMessage()];
         }
     }
+
+    public function addressUpdate(array $data): array
+    {
+        try {
+
+
+            $mdl = User::find(Auth::user()->id);
+            $mdl->country_id = $data['country_id'];
+            $mdl->city_id = $data['city_id'];
+            $mdl->district_id = $data['district_id'];
+            $mdl->save();
+
+            return ["status" => true, "message" => 'Adres bilgileri başarıyla güncellendi.', "user_data" => $mdl];
+        } catch (\Throwable $th) {
+            return ["status" => false, "message" => $th->getMessage()];
+        }
+    }
 }

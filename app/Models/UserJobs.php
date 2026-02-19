@@ -11,7 +11,6 @@ class UserJobs extends Model
     protected $table = 'user_jobs';
     protected $appends = ['country_name', 'city_name', 'district_name', 'specialization_name', 'images'];
 
-
     public function creator()
     {
         return $this->belongsTo(User::class, 'create_user_id', 'id');

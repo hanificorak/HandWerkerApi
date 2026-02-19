@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Profile\AddressUpdateRequest;
 use App\Http\Requests\Api\V1\Profile\PasswordUpdateRequest;
 use App\Http\Requests\Api\V1\Profile\ProfileUpdateRequest;
 use App\Http\Responses\ApiResponder;
@@ -15,7 +16,7 @@ class ProfileController extends Controller
     public function __construct(
         protected ProfileService $profileService
     ) {}
-   
+
     public function getUserInfo()
     {
         $result = $profileService = $this->profileService->getUserInfo();
@@ -51,4 +52,16 @@ class ProfileController extends Controller
     }
 
 
+    public function addressUpdate(AddressUpdateRequest $request)
+    {
+        $result = $profileService = $this->profileService->addressUpdate(
+            $request->validated()
+        );
+
+        if ($result["status"]) {
+            return ApiResponder::success($result["user_data"], 'Adres bilgisi başarıyla güncellendi.');
+        } else {
+            return ApiResponder::error($result["message"]);
+        }
+    }
 }

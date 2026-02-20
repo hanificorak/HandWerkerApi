@@ -109,7 +109,7 @@ class JobsService
             $mdl->approved_date = Carbon::now();
             $mdl->status = 3;
 
-            return ["message"=>"OK","status"=>true];
+            return ["message"=>"OK","status"=>$mdl->save()];
         } catch (\Throwable $th) {
             return ["message"=>$th->getMessage(),"status"=>false];
 

@@ -45,10 +45,10 @@ class JobsController extends Controller
             $request->validated()
         );
 
-        if ($result) {
-            return ApiResponder::success($result, 'Kayıt başarıyla tamamlandı.');
+        if ($result["status"]) {
+            return ApiResponder::success($result["status"], 'Kayıt başarıyla tamamlandı.');
         } else {
-            return ApiResponder::error("Kayıt işlemi başarısız.");
+            return ApiResponder::error($result["message"]);
         }
     }
 }

@@ -99,19 +99,20 @@ class JobsService
         }
     }
 
-    public function jobsOk(array $data): bool
+    public function jobsOk(array $data): array
     {
         try {
-            $jobs_id = $data['jobs_id'];
+            $jobs_id = $data['job_id'];
 
             $mdl = UserJobs::find($jobs_id);
             $mdl->approved_master = Auth::id();
             $mdl->approved_date = Carbon::now();
             $mdl->status = 3;
-            
-            return $mdl->save();
+
+            return ["message"=>"OK","status"=>true];
         } catch (\Throwable $th) {
-            return false;
+            return ["message"=>$th->getMessage(),"status"=>false];
+
         }
     }
 }

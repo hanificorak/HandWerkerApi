@@ -52,7 +52,7 @@ class MasterJobsService
                 $query->where('district', $data['district_id']);
             }
 
-            return $query->get()->toArray();
+            return $query->where('status', '!=', 0)->get()->toArray();
         } catch (\Throwable $th) {
             return [];
         }

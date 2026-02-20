@@ -69,6 +69,7 @@ class UserJobs extends Model
     {
         return $this->hasMany(UserJobsImages::class, 'user_jobs_id', 'id');
     }
+
     public function getImagesAttribute(): array
     {
         if (!$this->relationLoaded('imagesRelation')) {

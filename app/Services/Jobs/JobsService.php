@@ -20,11 +20,11 @@ class JobsService
             $query = UserJobs::with(['offers', 'countryRelation', 'cityRelation', 'districtRelation', 'specializationsRelation'])
                 ->orderByDesc('created_at');
 
-                if ($userType == null) {
-                    $query->where('create_user_id', Auth::user()->id);
-                }else{
-                    $query->where('master_id', Auth::user()->id);
-                }
+            if ($userType == null) {
+                $query->where('create_user_id', Auth::user()->id);
+            } else {
+                $query->where('master_id', Auth::user()->id);
+            }
 
 
             if (isset($data['status'])) {

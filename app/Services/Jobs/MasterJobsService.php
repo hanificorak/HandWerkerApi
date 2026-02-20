@@ -40,6 +40,10 @@ class MasterJobsService
                 $query->where('country', $data['country_id']);
             }
 
+            if (!empty($data['category_id'])) {
+                $query->where('category', $data['category_id']);
+            }
+
             if (!empty($data['city_id'])) {
                 $query->where('city', $data['city_id']);
             }

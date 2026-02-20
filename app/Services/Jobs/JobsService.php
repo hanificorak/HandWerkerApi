@@ -2,12 +2,12 @@
 
 namespace App\Services\Jobs;
 
-
+use App\Models\Offers;
 use App\Models\UserJobs;
 use App\Models\UserJobsImages;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 
 class JobsService
 {
@@ -104,15 +104,21 @@ class JobsService
         try {
             $jobs_id = $data['job_id'];
 
+            $offer_item = Offers::where('jobs_id', $jobs_id)->where('create_user_id', Auth::id())->first();
+
             $mdl = UserJobs::find($jobs_id);
             $mdl->approved_master = Auth::id();
             $mdl->approved_date = Carbon::now();
             $mdl->status = 3;
 
-            return ["message"=>"OK","status"=>$mdl->save()];
-        } catch (\Throwable $th) {
-            return ["message"=>$th->getMessage(),"status"=>false];
+            $mdl_offer = Offers::find($offer_item->id);
+            $mdl_offer->status = 3;
+            $mdl_offer->save();
 
+
+            return ["message" => "OK", "status" => true];
+        } catch (\Throwable $th) {
+            return ["message" => $th->getMessage(), "status" => false];
         }
     }
 }

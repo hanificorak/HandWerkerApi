@@ -21,7 +21,6 @@ class MasterJobsListRequest extends FormRequest
             'country_id' => ['nullable', 'integer'],
             'city_id' => ['nullable', 'integer'],
             'district_id' => ['nullable', 'integer'],
-            'category_id' => ['nullable', 'integer'],
         ];
     }
 

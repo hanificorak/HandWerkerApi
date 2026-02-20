@@ -110,6 +110,7 @@ class JobsService
             $mdl->approved_master = Auth::id();
             $mdl->approved_date = Carbon::now();
             $mdl->status = 3;
+            $mdl->save();
 
             $mdl_offer = Offers::find($offer_item->id);
             $mdl_offer->status = 3;

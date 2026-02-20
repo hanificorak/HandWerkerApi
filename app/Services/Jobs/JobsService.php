@@ -98,4 +98,20 @@ class JobsService
             return false;
         }
     }
+
+    public function jobsOk(array $data): bool
+    {
+        try {
+            $jobs_id = $data['jobs_id'];
+
+            $mdl = UserJobs::find($jobs_id);
+            $mdl->approved_master = Auth::id();
+            $mdl->approved_date = Carbon::now();
+            $mdl->status = 3;
+            
+            return $mdl->save();
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

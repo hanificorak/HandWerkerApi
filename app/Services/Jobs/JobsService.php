@@ -17,7 +17,6 @@ class JobsService
         try {
 
             $userType = (Auth::user()->expert_id == null ? null : Auth::user()->expert_id);
-
             $query = UserJobs::with(['offers', 'countryRelation', 'cityRelation', 'districtRelation', 'specializationsRelation'])
                 ->orderByDesc('created_at');
 
@@ -34,6 +33,7 @@ class JobsService
 
             return $query->get()->toArray();
         } catch (\Throwable $th) {
+            dd($th);
             return [];
         }
     }

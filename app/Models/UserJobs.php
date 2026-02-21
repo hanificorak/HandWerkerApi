@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserJobs extends Model
 {
     // Status =  0 = Beklemede | 1 = Onaylandı, Teklifler inceleniyor ve bekleniyor... \ 2 = Usta ile Analışldı \ 3 = Tamamlandı | 4 = iptal Edildibb0
 
     protected $table = 'user_jobs';
-    protected $appends = ['country_name', 'city_name', 'district_name', 'specialization_name', 'images'];
+    protected $appends = ['country_name', 'city_name', 'district_name', 'specialization_name', 'images', 'points'];
 
     public function creator()
     {
@@ -81,5 +83,12 @@ class UserJobs extends Model
             ->map(fn($path) => url($path))
             ->values()
             ->toArray();
+    }
+
+    public function getPointsAttribute(): int
+    {
+        return MasterPoints::where('job_id', $this->id)
+            ->where('create_user_id', FacadesAuth::id())
+            ->value('point') ?? 0;
     }
 }

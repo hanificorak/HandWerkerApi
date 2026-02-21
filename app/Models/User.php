@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
 
-    protected $appends = ['specialization_name'];
+    protected $appends = ['specialization_name', 'points'];
 
     protected $fillable = [
         'name',
@@ -69,5 +69,21 @@ class User extends Authenticatable
     public function getSpecializationNameAttribute()
     {
         return $this->specializationsRelation?->translation->title;
+    }
+
+    public function masterPoints()
+    {
+        return $this->hasMany(MasterPoints::class, 'master_id', 'id');
+    }
+    
+    public function getPointsAttribute(): int
+    {
+        $avg = $this->masterPoints()->avg('point');
+
+        if (!$avg) {
+            return 0;
+        }
+
+        return (int) round($avg);
     }
 }

@@ -9,6 +9,11 @@ class MasterPoints extends Model
 
     protected $appends = ['images'];
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'create_user_id', 'id');
+    }
+    
 
     public function imagesRelation()
     {

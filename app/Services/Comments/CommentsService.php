@@ -20,7 +20,7 @@ class CommentsService
 
             $master_id = $data['master_id'];
 
-            $query = MasterPoints::where('master_id', $master_id)->get();
+            $query = MasterPoints::with(['imagesRelation', 'creator'])->where('master_id', $master_id)->get();
 
             return ["message" => "OK", "status" => $query];
         } catch (\Throwable $th) {

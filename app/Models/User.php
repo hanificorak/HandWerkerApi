@@ -61,6 +61,9 @@ class User extends Authenticatable
         return $this->hasMany(UserJobs::class, 'create_user_id', 'id');
     }
 
+    
+
+
     public function specializationsRelation()
     {
         return $this->belongsTo(specialization::class, 'expert_id', 'id');

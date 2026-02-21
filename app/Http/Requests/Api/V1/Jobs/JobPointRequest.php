@@ -21,6 +21,8 @@ class JobPointRequest extends FormRequest
             'point' => ['required', 'integer'],
             'master_id' => ['required', 'integer'],
             'comment' => ['nullable', 'string'],
+            'photos'      => ['nullable', 'array'],
+
         ];
     }
 

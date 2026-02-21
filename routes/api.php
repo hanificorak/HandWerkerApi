@@ -44,6 +44,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/offers/status/rejected', [OffersController::class, 'offerRejected']);
 
     Route::post('/comments/jobsPoint', [CommentsController::class, 'jobsPoint']);
+    Route::post('/comments/getComments', [CommentsController::class, 'getComments']);
 
 
     Route::post('messages/send', [MessageController::class, 'send']);

@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\DB;
 class CommentsService
 {
 
+    public function getComments(array $data): array
+    {
+        try {
+
+            $master_id = $data['master_id'];
+
+            $query = MasterPoints::where('master_id', $master_id)->get();
+
+            return ["message" => "OK", "status" => $query];
+        } catch (\Throwable $th) {
+            return ["message" => $th->getMessage(), "status" => false];
+        }
+    }
+
+
     public function jobsPoint(array $data): array
     {
         try {

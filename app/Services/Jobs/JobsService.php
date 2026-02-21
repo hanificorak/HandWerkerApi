@@ -137,7 +137,7 @@ class JobsService
             $mdl->master_id = $master_id;
             $mdl->job_id = $job_id;
             $mdl->point = $point;
-            $mdl->comment = $comment;
+            $mdl->comments = $comment;
 
             return ["message" => "OK", "status" => $mdl->save()];
         } catch (\Throwable $th) {

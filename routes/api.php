@@ -46,8 +46,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     Route::post('messages/send', [MessageController::class, 'send']);
     Route::post('messages/{userId}/{offer_id}', [MessageController::class, 'getMessages']);
-
-
 });
 
 

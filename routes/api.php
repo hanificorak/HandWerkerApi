@@ -31,6 +31,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/jobs/add', [JobsController::class, 'add']);
     Route::post('/jobs/get', [JobsController::class, 'get']);
     Route::post('/jobs/jobsOk', [JobsController::class, 'jobsOk']);
+    Route::post('/jobs/jobsPoint', [JobsController::class, 'jobsPoint']);
 
     Route::post('/profile/getUserInfo', [ProfileController::class, 'getUserInfo']);
     Route::post('/profile/profileUpdate', [ProfileController::class, 'profileUpdate']);

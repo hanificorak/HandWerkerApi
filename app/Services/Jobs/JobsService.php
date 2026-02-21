@@ -2,6 +2,7 @@
 
 namespace App\Services\Jobs;
 
+use App\Models\MasterPoints;
 use App\Models\Offers;
 use App\Models\UserJobs;
 use App\Models\UserJobsImages;
@@ -118,6 +119,27 @@ class JobsService
 
 
             return ["message" => "OK", "status" => true];
+        } catch (\Throwable $th) {
+            return ["message" => $th->getMessage(), "status" => false];
+        }
+    }
+
+    public function jobsPoint(array $data): array
+    {
+        try {
+            $job_id = $data['job_id'];
+            $comment = $data['comment'];
+            $point = $data['point'];
+            $master_id = $data['master_id'];
+
+            $mdl = new MasterPoints();
+            $mdl->create_user_id = Auth::id();
+            $mdl->master_id = $master_id;
+            $mdl->job_id = $job_id;
+            $mdl->point = $point;
+            $mdl->comment = $comment;
+
+            return ["message" => "OK", "status" => $mdl->save()];
         } catch (\Throwable $th) {
             return ["message" => $th->getMessage(), "status" => false];
         }

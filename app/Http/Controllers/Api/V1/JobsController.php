@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Jobs\JobPointRequest;
 use App\Http\Requests\Api\V1\Jobs\JobsListRequest;
 use App\Http\Requests\Api\V1\Jobs\JobsOkRequest;
 use App\Http\Requests\Api\V1\Jobs\JobsRequest;
@@ -42,6 +43,19 @@ class JobsController extends Controller
     public function jobsOk(JobsOkRequest $request)
     {
         $result = $jobsService = $this->jobsService->jobsOk(
+            $request->validated()
+        );
+
+        if ($result["status"]) {
+            return ApiResponder::success($result["status"], 'Kayıt başarıyla tamamlandı.');
+        } else {
+            return ApiResponder::error($result["message"]);
+        }
+    }
+
+    public function jobsPoint(JobPointRequest $request)
+    {
+        $result = $jobsService = $this->jobsService->jobsPoint(
             $request->validated()
         );
 

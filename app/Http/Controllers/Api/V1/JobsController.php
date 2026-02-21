@@ -53,16 +53,5 @@ class JobsController extends Controller
         }
     }
 
-    public function jobsPoint(JobPointRequest $request)
-    {
-        $result = $jobsService = $this->jobsService->jobsPoint(
-            $request->validated()
-        );
 
-        if ($result["status"]) {
-            return ApiResponder::success($result["status"], 'Kayıt başarıyla tamamlandı.');
-        } else {
-            return ApiResponder::error($result["message"]);
-        }
-    }
 }

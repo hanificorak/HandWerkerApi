@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\CommentsController;
 use App\Http\Controllers\Api\V1\JobsController;
 use App\Http\Controllers\Api\V1\MasterJobsController;
 use App\Http\Controllers\Api\V1\MasterOfferController;
@@ -31,7 +32,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/jobs/add', [JobsController::class, 'add']);
     Route::post('/jobs/get', [JobsController::class, 'get']);
     Route::post('/jobs/jobsOk', [JobsController::class, 'jobsOk']);
-    Route::post('/jobs/jobsPoint', [JobsController::class, 'jobsPoint']);
 
     Route::post('/profile/getUserInfo', [ProfileController::class, 'getUserInfo']);
     Route::post('/profile/profileUpdate', [ProfileController::class, 'profileUpdate']);
@@ -42,6 +42,8 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/offers/get/item', [OffersController::class, 'getItem']);
     Route::post('/offers/status/approved', [OffersController::class, 'offerApproved']);
     Route::post('/offers/status/rejected', [OffersController::class, 'offerRejected']);
+
+    Route::post('/comments/jobsPoint', [CommentsController::class, 'jobsPoint']);
 
 
     Route::post('messages/send', [MessageController::class, 'send']);

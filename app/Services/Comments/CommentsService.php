@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Jobs;
+namespace App\Services\Comments;
 
 use App\Models\MasterPoints;
 use App\Models\Offers;

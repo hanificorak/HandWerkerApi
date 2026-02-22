@@ -18,7 +18,7 @@ class JobsService
         try {
 
             $userType = (Auth::user()->expert_id == null ? null : Auth::user()->expert_id);
-            $query = UserJobs::with(['offers', 'countryRelation', 'cityRelation', 'districtRelation', 'specializationsRelation'])
+            $query = UserJobs::with(['offers', 'countryRelation', 'cityRelation', 'districtRelation', 'specializationsRelation','images'])
                 ->orderByDesc('created_at');
 
             if ($userType == null) {

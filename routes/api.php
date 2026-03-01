@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AIController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CommentsController;
 use App\Http\Controllers\Api\V1\JobsController;
@@ -28,6 +29,9 @@ Route::prefix('v1')->group(function () {
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::post('/param/jobs', [ParamController::class, 'JobsParam']);
+
+    Route::post('/jobPriceCheck', [AIController::class, 'jobPriceCheck']);
+
 
     Route::post('/jobs/add', [JobsController::class, 'add']);
     Route::post('/jobs/get', [JobsController::class, 'get']);

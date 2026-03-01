@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Profile;
+namespace App\Http\Requests\Api\V1\AI;
 
 use App\Http\Responses\ApiResponder;
 use Illuminate\Foundation\Http\FormRequest;

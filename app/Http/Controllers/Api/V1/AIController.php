@@ -3,16 +3,13 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Auth\ApprovedRequest;
-use App\Http\Requests\Api\V1\Auth\LoginRequest;
-use App\Http\Requests\Api\V1\Auth\RegisterRequest;
-use App\Http\Requests\Api\V1\Profile\JobPriceCheckRequest;
+use App\Http\Requests\Api\V1\AI\JobPriceCheckRequest;
+
 use App\Http\Responses\ApiResponder;
 use App\Models\Cities;
 use App\Models\Countries;
 use App\Models\specialization;
 use App\Services\AI\AiService;
-use App\Services\Auth\AuthService;
 use Illuminate\Http\Request;
 
 class AIController extends Controller
@@ -31,7 +28,7 @@ class AIController extends Controller
 
 
         $result = $aiService = $this->aiService->sendGemini($country_name, $city_name, $category_name, $data['message']);
-        
+
         return ApiResponder::success($result, 'İşlem başarılı');
     }
 }

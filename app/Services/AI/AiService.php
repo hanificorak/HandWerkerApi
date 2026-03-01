@@ -44,7 +44,7 @@ class AiService
 
 
 
-            $response = Http::withHeaders([
+            $response = Http::timeout(120)->connectTimeout(30)->withHeaders([
                 'x-goog-api-key' => $apiKey,
                 'Content-Type' => 'application/json',
             ])->post(
